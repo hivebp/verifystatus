@@ -1,0 +1,8 @@
+include/.DS_Store
+src/.eosproj
+node_modules/
+package-lock.json
+package.json
+.eosproj
+verifystatus.abi
+verifystatus.wasm
