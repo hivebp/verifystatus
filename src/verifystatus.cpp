@@ -409,8 +409,6 @@ ACTION verifystatus::remfromlist(
 ACTION verifystatus::checkvotes(
     vector<name> voters
 ) {
-    require_auth(get_self());
-
     auto status_ptr = statuses.begin();
 
     config_s current_config = config.get();
