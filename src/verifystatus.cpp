@@ -12,9 +12,9 @@ ACTION verifystatus::init() {
 asset verifystatus::get_total_staked(
     name voter
 ) {
-    userres_t resources = get_user_res(voter);
+    delegated_bandwidth_t resources = get_delegated_bandwidth(voter);
 
-    auto res_ptr = resources.find(voter.value);
+    auto res_ptr = resources.begin();
 
     asset stake = asset(0, symbol("WAX", 8));
 

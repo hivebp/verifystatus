@@ -117,12 +117,13 @@ private:
         name creator;
     };
 
-    struct userres_s {
-        name                owner;
-        asset               net_weight;
-        asset               cpu_weight;
+    struct delegated_bandwidth_s {
+        name          from;
+        name          to;
+        asset         net_weight;
+        asset         cpu_weight;
 
-        auto primary_key() const { return owner.value; };
+        uint64_t  primary_key() const { return to.value; };
     };
 
     TABLE config_s {
@@ -138,17 +139,17 @@ private:
     typedef eosio::multi_index<name("statuses"), statuses_s> statuses_t;
     typedef eosio::multi_index<name("collections"), collections_s> collections_t;
     typedef eosio::multi_index<name("marketplaces"), marketplaces_s> marketplaces_t;
-    typedef eosio::multi_index<name("userres"), userres_s> userres_t;
+    typedef eosio::multi_index<name("delband"), delegated_bandwidth_s> delegated_bandwidth_t;
 
     votes_t votes = votes_t(get_self(), get_self().value);
     markets_t markets = markets_t(get_self(), get_self().value);
     statuses_t statuses = statuses_t(get_self(), get_self().value);
     collections_t collections = collections_t(name("atomicassets"), name("atomicassets").value);
     marketplaces_t marketplaces = marketplaces_t(name("atomicmarket"), name("atomicmarket").value);
-    userres_t userres = userres_t(name("eosio"), name("eosio").value);
+    delegated_bandwidth_t delband = delegated_bandwidth_t(name("eosio"), name("eosio").value);
 
-    userres_t get_user_res(name owner) {
-        return userres_t(name("eosio"), owner.value);
+    delegated_bandwidth_t get_delegated_bandwidth(name from) {
+        return delegated_bandwidth_t(name("eosio"), from.value);
     }
 
     config_t config = config_t(get_self(), get_self().value);
